@@ -1,26 +1,30 @@
 const inquirer = require('inquirer');
+const MaxLengthInputPrompt = require('inquirer-maxlength-input-prompt')
 const fs = require('fs');
+
+inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
 
 const questions = [
     {
-        type: 'input',
-        message: 'Input up to three characters',
+        type: 'maxlength-input',
+        message: 'Input logo text, up to three characters.',
         name: 'characters',
+        maxLength: 3,
     },
     {
         type: 'input',
-        message: 'Input color keyword or code for text',
+        message: 'Input color (keyword or code) for text',
         name: 'txtColor',
     },
     {
         type: 'list',
-        message: 'Choose shape',
+        message: 'Choose logo shape.',
         name: 'shape',
         choices: ['Circle', 'Triangle', 'Square'],
     },
     {
         type: 'input',
-        message: 'Input color keyword or code for shape',
+        message: 'Input color (keyword or code) for shape.',
         name: 'shapeColor',
     },
 ]
@@ -28,6 +32,9 @@ const questions = [
 inquirer
     .prompt(questions)
     .then((answers) => {
-        // fs.writeFile()
-        console.log(answers);
+        fs.writeFile('logo.svg', answers, (err) => {
+            if (err) throw err;
+            console.log('Generated logo.svg');
+        })
+        // console.log(answers);
 })
