@@ -71,14 +71,14 @@ inquirer
 // Function to generate SVG content
 function generateSvg(answers, shape) {
     // Generate the text element
-    const textSvg = `<text x="50%" y="50%" font-size="70" text-anchor="middle" fill="${answers.txtColor}">${answers.characters}</text>`;
+    const textSvg = `<text x="50%" y="65%" font-size="70" text-anchor="middle" fill="${answers.txtColor}">${answers.characters}</text>`;
     
     // Generate the shape element using the render() method of the shape class
     const shapeSvg = shape.render();
     
     // Combine the shape and text into a complete SVG structure
     return `
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300" height="300">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300" height="200">
             ${shapeSvg}
             ${textSvg}
         </svg>
